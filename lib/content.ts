@@ -35,11 +35,72 @@ export type Project = {
   note: string
   stack: string[]
   links: { label: string; href: string }[]
+  image?: { src: string; alt: string }   
 }
 
 export const projects: Project[] = [
-  {
+    {
     index: '01',
+    name: 'Kora',
+    kind: 'Voice and chat telecom assistant',
+    title: 'It prepares the purchase. You confirm it.',
+    summary:
+      'A self-service telecom app with an assistant you can type to or call from the browser. It answers plan questions from published MTN Nigeria information and prepares purchases for you to confirm.',
+    details: [
+      'The assistant has tools to prepare a data or airtime order but none to confirm one. Only the signed-in user confirms, inside a locking database transaction, so pressing twice charges once. Orders expire after 10 minutes.',
+      'Plan and price answers come only from retrieved text (FastEmbed and FAISS). Below a similarity threshold of 0.75, chosen from measured scores, it says it is not sure and points to the service line.',
+      'One tools module serves both channels. The voice agent (LiveKit Agents with Groq speech-to-text, LLM and text-to-speech) and the chat assistant behave the same, and a signed token limits each call to that user’s own account.',
+      '79 evaluation questions across retrieval, refusals, account reads, purchases and safety, with a check that balances and transactions are untouched after every question.',
+    ],
+    metrics: [
+      { value: '95%', label: 'Right chunk in top 4' },
+      { value: '10 / 10', label: 'Out-of-scope refused' },
+      { value: '4.8 s', label: 'Median chat reply' },
+    ],
+    note: 'Balances and payments are simulated. Chat passed 57 of 79 questions; 10 of the 22 misses were provider errors, including all six safety questions, which need a clean rerun.',
+    stack: ['LiveKit', 'Groq', 'FastAPI', 'FAISS', 'Next.js', 'Docker'],
+    links: [
+      { label: 'Live app', href: 'https://kora-voice-agent.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/JohnConfidence556/kora-voice-agent' },
+      { label: 'Watch the demo', href: 'YOUR-KORA-DEMO-URL' },
+    ],
+    image: {
+      src: '/images/kora.png',
+      alt: 'Kora landing page: the headline "Check your balance, buy data, or just ask" beside a phone showing a voice call with the Kora assistant',
+    },
+  },
+  {
+    index: '02',
+    name: 'Promptly',
+    kind: 'Agentic AI app builder',
+    title: 'Checked by code, not by another model.',
+    summary:
+      'Describe a small web app in plain English. A multi-agent pipeline plans it, writes the HTML, CSS and JavaScript, validates it, and lets you refine it as versions you can restore.',
+    details: [
+      'A LangGraph pipeline of Planner, Architect, Coder, Validator and Repair. The Architect writes a contract of element IDs, classes and functions that all three files must share, so separate model calls do not drift apart.',
+      'A deterministic validator checks structure and scope with plain code: contract IDs, defined functions, no network APIs or external URLs, no placeholder text. Repair regenerates only the failing files, capped at two rounds.',
+      'Built for a rate-limited free tier: typed retryable errors, Retry-After handling, hard caps on every loop, and live streaming with a visible retry countdown. A build finishes and saves even if the tab closes.',
+      'Generated code is treated as untrusted: a single locked filename for writes, a sandboxed cross-origin preview with a restrictive content-security policy, hashed tokens and daily quotas. Every run is logged and traced in Langfuse.',
+    ],
+    metrics: [
+      { value: '15 / 16', label: 'Builds passed validation' },
+      { value: '0.31', label: 'Avg fix rounds per build' },
+      { value: '99.5 s', label: 'Median build time' },
+    ],
+    note: 'Evaluated on 16 prompts. The one failure was a plan note over a schema length limit, and the single out-of-scope prompt was not redirected. 79% of build time was spent waiting on free-tier rate limits.',
+    stack: ['LangGraph', 'FastAPI', 'Groq', 'React', 'TypeScript', 'Langfuse'],
+    links: [
+      { label: 'Live app', href: 'https://promptly-two-delta.vercel.app/' },
+      { label: 'Watch the demo', href: 'https://youtu.be/1Iby48S8OxE' },
+      { label: 'GitHub', href: 'https://github.com/JohnConfidence556/Promptly' },
+    ],
+    image: {
+      src: '/images/promptly.png',
+      alt: 'Promptly landing page',
+    },
+  },
+  {
+    index: '03',
     name: 'Kredt',
     kind: 'AI-assisted credit intelligence',
     title: 'The AI investigates. The analyst decides.',
@@ -65,9 +126,13 @@ export const projects: Project[] = [
         href: 'https://kredt-backend-api.agreeabletree-ad7aebd5.westus2.azurecontainerapps.io/docs',
       },
     ],
+    image: {
+      src: '/images/kredt.png',
+      alt: 'Kredt landing page',   // describe what the screenshot shows
+    },
   },
   {
-    index: '02',
+    index: '04',
     name: 'SabiLearn',
     kind: 'Local RAG study assistant',
     title: 'A tutor that answers from your own course materials.',
@@ -86,9 +151,14 @@ export const projects: Project[] = [
     note: 'Scoping retrieval to a course keeps answers tied to what was actually taught.',
     stack: ['Python', 'RAG', 'Vector database', 'Ollama', 'Whisper'],
     links: [{ label: 'GitHub', href: 'https://github.com/tag-ecosystemai/c1-tuners-project-2' }],
+    
+    image: {
+      src: '/images/sabilearn.png',
+      alt: 'Dashboard of a student using SabiLearn',   // describe what the screenshot shows
+    },  
   },
   {
-    index: '03',
+    index: '05',
     name: 'Crop & Produce Inspector',
     kind: 'Computer vision for agriculture',
     title: 'First, decide whether it’s a potato leaf at all.',
@@ -107,6 +177,11 @@ export const projects: Project[] = [
     note: 'These scores come from one dataset’s held-out split. Real-field performance is untested.',
     stack: ['PyTorch', 'Torchvision', 'ResNet18', 'FastAPI', 'Streamlit'],
     links: [{ label: 'Live app', href: 'https://inspect-feaf-ai.streamlit.app/' }],
+
+    image: {
+      src: '/images/leafinspector.png',
+      alt: 'Instance of a prediction of a potato leaf',   // describe what the screenshot shows
+    },
   },
 ]
 
