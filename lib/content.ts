@@ -252,3 +252,61 @@ export const skills = [
     items: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'SQL', 'Vector databases'],
   },
 ]
+
+
+export type Talk = {
+  title: string
+  event: string
+  date: string
+  format: string
+  description: string
+  tags: string[]
+  links: { label: string; href: string }[]
+}
+
+export const talks: Talk[] = [
+  {
+    title: 'From Curiosity to Capability: AI, Hackathons & Career Growth',
+    event: 'Data Living 1st Anniversary',
+    date: '8 August 2026',
+    format: 'Twitter (X) Spaces panel',
+    description:
+      'A casual panel for Data Living’s first anniversary on how hackathons are approached, the problem-solving mindset behind them, and how AI tools are accelerating career growth.',
+    tags: ['AI', 'Hackathons', 'Career growth'],
+    links: [],
+  },
+]
+
+export type Post = {
+  title: string
+  description: string
+  href: string
+  source: string
+  status: string
+}
+
+export const posts: Post[] = [
+  {
+    title: 'Python For AI Engineering',
+    description:
+      'A practical, hands-on journey through Python concepts, tools and techniques needed for AI engineering.',
+    href: 'https://github.com/JohnConfidence556/Python-for-AI-Engineering',
+    source: 'GitHub',
+    status: 'In progress',
+  },
+]
+
+export const volunteering = [
+  {
+    community: 'AI Engineering Africa',
+    role: 'Team Ops Lead',
+    period: 'Present',
+    body: 'Lead team operations across communication, content, technical and events.',
+  },
+  {
+    community: 'Tech Forge Accelerator',
+    role: 'Team Lead',
+    period: 'Present',
+    body: 'Lead team operations across design, content and partnerships. Keep workflows running and the team on target, working closely with the founders.',
+  },
+]
